@@ -11,8 +11,8 @@ static const int swallowfloating    = 0;        /* 1 means swallow floating wind
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = {"JetBrainsMono Nerd Font:size=14", "JoyPixels:pixelsize=10:antialias=true:autohint=true"  };
-static char dmenufont[]             = "JetBrainsMono Nerd Font:size=14";
+static const char *fonts[]          = {"IBM Plex Sans Medium:size=13", "JetBrains Mono Nerd Font:pixelsize=12:antialias=true:autohint=true"  };
+static char dmenufont[]             = "IBM Plex Sans Medium:size=12";
 static char normbgcolor[]           = "#3b4252";
 static char normbordercolor[]       = "#3b4252";
 static char normfgcolor[]           = "#e5e9f0";
@@ -38,7 +38,7 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1: \uf120", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1:\uf120", "2:\uf269", "3:\uf121", "4:\uf115", "5:\uf1fc", "6:\uf667", "7:\uf0fc", "8:\uf499", "9:\uf661" };
 
 static const Rule rules[] = {
 	/* xprop(1):
