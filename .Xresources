@@ -56,5 +56,5 @@
 *.normbgcolor: nord2
 *.normfgcolor: nord4
 *.selbordercolor: nord12
-*.selbgcolor: #d08770 
+*.selbgcolor: #d08770
 *.selfgcolor: nord4
