@@ -12,7 +12,7 @@ static const int smartgaps          = 0;       /* 1 means no outer gap when ther
 static const int showbar            = 1;       /* 0 means no bar */
 static const int topbar             = 1;       /* 0 means bottom bar */
 /* static const char *fonts[]          = {"IBMPlexSans-Medium:size=13", "JetBrainsMono Nerd Font:size=13:antialias=true:autohint=true"  }; */
-static const char *fonts[]          = {"IBMPlexSans-Medium:size=13", "Hack Nerd Font:size=13:antialias=true:autohint=true"  };
+static const char *fonts[]          = {"IBMPlexSans-Medium:size=13", "Hack Nerd Font:size=13:antialias=true:autohint=true","joypixels:size=13:antialias=true:autohint=true"  };
 static char dmenufont[]             = "IBMPlexSans-Medium:size=13";
 static char normbgcolor[]           = "#2e3440";
 static char normbordercolor[]       = "#4c566a";
@@ -32,10 +32,11 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[]         = {"st", "-n", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[]         = {"st", "-n", "spcalc", "-f", "JetBrainsMonoNL-Regular:size=14", "-g", "50x20", "-e", "bc", "-lq", NULL };
-const char *spcmdpamix[]     = {"st", "-n", "sppamix", "-f", "JetBrainsMonoNL-Regular:size=14", "-g", "60x20", "-e", "pamix", NULL, NULL };
+const char *spcmd2[]         = {"st", "-n", "spcalc", "-f", "JetBrainsMono-Regular:size=14", "-g", "50x20", "-e", "bc", "-lq", NULL };
+const char *spcmdpamix[]     = {"st", "-n", "sppamix", "-f", "JetBrainsMono-Regular:size=14", "-g", "60x20", "-e", "pamix", NULL, NULL };
 const char *spcmdequalizer[] = {"pulseaudio-equalizer-gtk", NULL, NULL, NULL, NULL, "-g", "50x20", NULL, NULL, NULL, NULL };
-const char *spcmdquteb[]     = {"qutebrowser", NULL, NULL, NULL, NULL, "-g", "50x20", NULL, NULL, NULL, NULL };
+const char *sppopupbrowser[] = {"qutebrowser", NULL, NULL, NULL, NULL, "-g", "60x20", NULL, NULL, NULL, NULL };
+const char *spfilebrowser[]  = {"st", "-n", "vifmpop", "-g", "120x34",NULL};
 /* const char *spcmdwifi[]     = {"st", "-n", "spwifi", "-f", "JetBrainsMonoNL-Regular:size=14", "-g", "50x20", "-e", "sudo nmtui", NULL, NULL }; */
 //st -n wifi -e sudo nmtui
 static Sp scratchpads[] = {
@@ -44,7 +45,8 @@ static Sp scratchpads[] = {
 	{"spcalc",         spcmd2},
 	{"sppamix",        spcmdpamix},
 	{"equalizer",      spcmdequalizer},
-	{"qutebrowser",    spcmdquteb},
+	{"qutebrowser",    sppopupbrowser},
+	{"vifmpop",        spfilebrowser},
 };
 
 /* tagging */
@@ -57,10 +59,11 @@ static const Rule rules[] = {
 	*/
 	/* class                    instance                 title       	    tags mask    isfloating   isterminal  noswallow  monitor */
 	{ "Gimp",                     NULL,                  NULL,       	    1 << 8,       0,           0,         0,        -1 },
-	{ "firefox",                  "Navigator",           NULL,       	    1 << 1,       0,           0,         0,        -1 },
+	{ "Brave-browser",            NULL,                  NULL,       	    1 << 1,       0,           0,         0,        -1 },
 	{ "Subl3",                    NULL,                  NULL,       	    1 << 2,       0,           0,         0,        -1 },
 	{ "Pcmanfm",                  NULL,                  NULL,                  1 << 3,       0,           0,         0,        -1 },
 	{ "TelegramDesktop",          NULL,                  NULL,                  1 << 6,       1,           0,         0,        -1 },
+	{ "SimpleScreenRecorder",     NULL,                  NULL,                  1 << 4,       1,           0,         0,        -1 },
 	{ "qBittorrent",              NULL,                  NULL,       	    1 << 8,       1,           0,         0,        -1 },
 	{ "Arcologout.py",            NULL,                  NULL,       	    0,            1,           0,         0,        -1 },
 	{ "Pavucontrol",              NULL,                  NULL,       	    0,            1,           0,         0,        -1 },
@@ -68,12 +71,14 @@ static const Rule rules[] = {
 	{ NULL,                       "wifi",                NULL,                  0,            1,           0,         0,        -1 },
 	{ "St",                       NULL,                  NULL,       	    0,            0,           1,         0,        -1 },
 	{ "Alacritty",                NULL,                  NULL,       	    0,            0,           1,         0,        -1 },
+	{ "Termite",                  NULL,                  NULL,       	    0,            0,           1,         0,        -1 },
 	{ NULL,                       NULL,                  "Event Tester",        0,            0,           0,         1,        -1 },
-	{ NULL,                       "spterm",              NULL,       	    SPTAG(0),     1,           1,         0,        -1 },
-	{ NULL,                       "spcalc",              NULL,       	    SPTAG(1),     1,           1,         0,        -1 },
-	{ NULL,                       "sppamix",             NULL,                  SPTAG(2),     1,           1,         0,        -1 },
+	{ NULL,                       "spterm",              NULL,       	    SPTAG(0),     1,           0,         0,        -1 },
+	{ NULL,                       "spcalc",              NULL,       	    SPTAG(1),     1,           0,         0,        -1 },
+	{ NULL,                       "sppamix",             NULL,                  SPTAG(2),     1,           0,         0,        -1 },
 	{ "Pulseaudio-equalizer-gtk", NULL,                  NULL,                  SPTAG(3),     1,           0,         0,        -1 },
 	{ NULL,                       "qutebrowser",         NULL,                  SPTAG(4),     1,           0,         0,        -1 },
+	{ NULL,                       "vifmpop",             NULL,                  SPTAG(5),     1,           0,         0,        -1 },
 };
 
 /* layout(s) */
@@ -145,6 +150,14 @@ static Key keys[] = {
 	TAGKEYS(			XK_9,		8)
 	{ MODKEY,			XK_0,		view,		{.ui = ~0 } },
 	{ MODKEY|ShiftMask,		XK_0,		tag,		{.ui = ~0 } },
+        /********************* SCRATCHPADS ********************************************/
+	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
+	{ MODKEY|ShiftMask,		XK_apostrophe,	togglescratch,	{.ui = 1} },
+	{ MODKEY,		        XK_p,		togglescratch,	{.ui = 2} },
+	{ MODKEY|ShiftMask,		XK_p,		togglescratch,	{.ui = 3} },
+	{ MODKEY|ShiftMask,		XK_w,		togglescratch,	{.ui = 4} },
+	{ MODKEY|ShiftMask,		XK_n,		togglescratch,	{.ui = 5} },
+
 	{ MODKEY,			XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 5") },
 	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("amixer -q set Master toggle") },
 	{ MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 5") },
@@ -196,10 +209,8 @@ static Key keys[] = {
 	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
 	{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
-	{ MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} },
-	/* { MODKEY|ShiftMask,		XK_apostrophe,	spawn,		SHCMD("") }, */
+	/* { MODKEY,		        XK_apostrophe,	spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
-	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
 
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
 	/* { MODKEY|ShiftMask,		XK_z,		spawn,		SHCMD("") }, */
@@ -213,14 +224,9 @@ static Key keys[] = {
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
 	{ MODKEY,		        XK_n,		spawn,		SHCMD("alacritty -e nvim") },
-	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD("alacritty -e ~/.config/vifm/scripts/vifmrun") },
+	/* { MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD("alacritty -e ~/.config/vifm/scripts/vifmrun") }, */
 
-	{ MODKEY,		        XK_p,		togglescratch,	{.ui = 2} },
-	{ MODKEY|ShiftMask,		XK_p,		togglescratch,	{.ui = 3} },
-
-
-	{ MODKEY,		        XK_w,		togglescratch,	{.ui = 4} },
-	{ MODKEY|ShiftMask,		XK_w,		spawn,	        SHCMD("firefox") },
+	{ MODKEY,		        XK_w,		spawn,	        SHCMD("brave") },
 	/* { MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("pulseaudio-equalizer-gtk") }, */
 	/* { MODKEY,			XK_comma,	spawn,		SHCMD("mpc prev") }, */
 	/* { MODKEY|ShiftMask,		XK_comma,	spawn,		SHCMD("mpc seek 0%") }, */
@@ -242,7 +248,7 @@ static Key keys[] = {
         { MODKEY,			XK_F2,		spawn,		SHCMD("tutorialvids") },
 	{ MODKEY,		        XK_F3,		spawn,		SHCMD("amixer -q set Master toggle") },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD("pcmanfm") },
-	{ MODKEY|ShiftMask,		XK_F4,		spawn,		SHCMD("st -n vifm -e vifm") },
+	{ MODKEY|ShiftMask,		XK_F4,		spawn,		SHCMD("st -n vifm -e ~/.config/vifm/scripts/vifmrun") },
 	{ MODKEY,			XK_F5,		spawn,		SHCMD("generate-thumbnail") },
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") },
@@ -251,7 +257,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_F10,		spawn,		SHCMD("dmenuumount") },
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("mpv --no-cache --no-osc --no-input-default-bindings --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
 	/* { MODKEY,			XK_F12,		xrdb,		{.v = NULL } }, */
-	{ MODKEY,		        XK_F12,		spawn,	        SHCMD("st -n wifi -e sudo nmtui") },
+	{ MODKEY,		        XK_F12,		spawn,	        SHCMD("st -n wifi -e nmtui") },
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
